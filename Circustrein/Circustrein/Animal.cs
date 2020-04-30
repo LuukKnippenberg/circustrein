@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Circustrein
 {
-    class Animal
+    public class Animal
     {
         public Animal(string name, string diet, int size)
         {
