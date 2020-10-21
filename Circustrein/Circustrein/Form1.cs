@@ -45,7 +45,7 @@ namespace Circustrein
         private void DisplayAnimalList()
         {
             lbAnimalList.Items.Clear();
-            List<Animal> animalList = train.animalList;
+            List<Animal> animalList = train.ActualAnimalList;
 
             for (int i = 0; i < animalList.Count; i++)
             {

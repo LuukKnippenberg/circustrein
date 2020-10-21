@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Circustrein;
 
@@ -7,13 +8,22 @@ namespace Circustrein
 {
     class Train
     {
-        public List<Wagon> wagonList { get; private set; }
-        public List<Animal> animalList { get; private set; }
+        public List<Wagon> ActualWagonList { get; private set; }
+        public ReadOnlyCollection<Wagon> wagonList
+        {
+            get { return ActualWagonList.AsReadOnly(); }
+        }
+
+        public List<Animal> ActualAnimalList { get; private set; }
+        public ReadOnlyCollection<Animal> animalList
+        {
+            get { return ActualAnimalList.AsReadOnly(); }
+        }
 
         public Train()
         {
-            wagonList = new List<Wagon>();
-            animalList = new List<Animal>();
+            ActualWagonList = new List<Wagon>();
+            ActualAnimalList = new List<Animal>();
         }
 
         public void AddAnimal(string name, Animal.Diet diet, string sizeString)
@@ -34,18 +44,18 @@ namespace Circustrein
                 size = 5;
             }
 
-            animalList.Add(new Animal(name, diet, size));
+            ActualAnimalList.Add(new Animal(name, diet, size));
         }
 
         public void DistibuteAnimals()
         {
-            wagonList.Clear();
+            ActualWagonList.Clear();
             List<Animal> animalListSorted = new List<Animal>();
 
             //Check if first wagon exists and creates if it doesn't.
             if (wagonList.Count == 0)
             {
-                wagonList.Add(new Wagon());
+                ActualWagonList.Add(new Wagon());
             }
 
             //Sort the animal list descending by size, this will allow the algorithm to place the large animals first.
@@ -67,16 +77,16 @@ namespace Circustrein
 
                 if (!addSuccess)
                 {
-                    wagonList.Add(new Wagon());
-                    wagonList[(wagonList.Count - 1)].AddAnimal(animalListSorted[i]);
+                    ActualWagonList.Add(new Wagon());
+                    ActualWagonList[(ActualWagonList.Count - 1)].AddAnimal(animalListSorted[i]);
                 }
             }
         }
 
         public void ClearLists()
         {
-            animalList = new List<Animal>();
-            wagonList = new List<Wagon>();
+            ActualAnimalList = new List<Animal>();
+            ActualWagonList = new List<Wagon>();
         }
 
     }
