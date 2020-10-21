@@ -19,7 +19,7 @@ namespace Circustrein
             if(CheckForSpace(animal) && CheckSafety(animal))
             {
                 animalList.Add(animal);
-                currentContent = currentContent + animal.Size;
+                currentContent = currentContent + animal.size;
                 return true;
             }
             else
@@ -30,7 +30,7 @@ namespace Circustrein
 
         private bool CheckForSpace(Animal animal)
         {  
-            if ((animal.Size + currentContent) <= (maxContent))
+            if ((animal.size + currentContent) <= (maxContent))
             {
                 return true;
             }
@@ -43,21 +43,26 @@ namespace Circustrein
 
         private bool CheckSafety(Animal animal)
         {
-            bool safe = true;
+            //bool safe = true;
 
             for (int i = 0; i < animalList.Count; i++)
             {
-                if(animalList[i].Diet.ToLower() == "carnivore" && animalList[i].Size >= animal.Size)
+                if(animalList[i].diet.ToString() == "carnivore" && animalList[i].size >= animal.size)
                 {
-                    safe = false;
+                    //safe = false;
+                    return false;
                 }
 
-                if(animal.Diet.ToLower() == "carnivore" && animalList[i].Size <= animal.Size)
+                if(animal.diet.ToString() == "carnivore" && animalList[i].size <= animal.size)
                 {
-                    safe = false;
+                    //safe = false;
+                    return false;
                 }
             }
 
+            return true;
+
+            /*
             if (safe)
             {
                 return true;
@@ -66,6 +71,7 @@ namespace Circustrein
             {
                 return false;
             }
+            */
         }
     }
 }

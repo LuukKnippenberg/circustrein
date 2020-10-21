@@ -5,15 +5,18 @@ namespace Circustrein
 {
     class Animal
     {
-        public Animal(string name, string diet, int size)
+
+        public enum Diet { Carnivore, Herbivore };
+
+        public Animal(string _name, Diet _diet, int _size)
         {
-            Name = name;
-            Diet = diet;
-            Size = size;
+            name = _name;
+            size = _size;
+            diet = _diet;
         }
 
-        public string Name { get; set; }
-        public string Diet { get; set; }
-        public int Size { get; set; }
+        public string name { get; set; }
+        public Diet diet { get; set; }
+        public int size { get; set; }
     }
 }

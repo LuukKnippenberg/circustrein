@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Circustrein;
 
 namespace Circustrein
 {
@@ -15,7 +16,7 @@ namespace Circustrein
             animalList = new List<Animal>();
         }
 
-        public void AddAnimal(string name, string diet, string sizeString)
+        public void AddAnimal(string name, Animal.Diet diet, string sizeString)
         {
             int size;
 
@@ -48,7 +49,7 @@ namespace Circustrein
             }
 
             //Sort the animal list descending by size, this will allow the algorithm to place the large animals first.
-            var orderBySize = from element in animalList orderby element.Size descending orderby element.Diet  select element;
+            var orderBySize = from element in animalList orderby element.size descending orderby element.diet  select element;
             foreach(Animal animal in orderBySize)
             {
                 animalListSorted.Add(animal);

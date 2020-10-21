@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Circustrein;
 
 namespace Circustrein
 {
@@ -21,14 +22,15 @@ namespace Circustrein
 
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
-            string diet;
+            Animal.Diet diet;
+
             if (rbCarnivore.Checked)
             {
-                diet = "Carnivore";
+                diet = Animal.Diet.Carnivore;
             }
             else
             {
-                diet = "Herbivore";
+                diet = Animal.Diet.Herbivore;
             }
 
             train.AddAnimal(tbName.Text, diet, cbSize.Text);
@@ -48,7 +50,7 @@ namespace Circustrein
             for (int i = 0; i < animalList.Count; i++)
             {
                 Animal currentAnimal = animalList[i];
-                lbAnimalList.Items.Add(currentAnimal.Name + " - Size: " + currentAnimal.Size + " - Diet: " + currentAnimal.Diet);
+                lbAnimalList.Items.Add(currentAnimal.name + " - Size: " + currentAnimal.size + " - Diet: " + currentAnimal.diet);
             }
         }
 
@@ -68,7 +70,7 @@ namespace Circustrein
                 for (int x = 0; x < train.wagonList[i].animalList.Count; x++)
                 {
                     Animal currentAnimal = train.wagonList[i].animalList[x];
-                    lbDistributedAnimals.Items.Add(currentAnimal.Name + " - Size: " + currentAnimal.Size + " - Diet: " + currentAnimal.Diet + " - Wagon: " + (i + 1));
+                    lbDistributedAnimals.Items.Add(currentAnimal.name + " - Size: " + currentAnimal.size + " - Diet: " + currentAnimal.diet + " - Wagon: " + (i + 1));
                 }
             }
         }
