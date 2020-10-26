@@ -21,7 +21,7 @@ namespace CircustreinTest
             train.AddAnimal(name, diet, size);
 
             //Assert
-            int actual = train.animalList[0].Size;
+            int actual = train.animalListReadOnly[0].Size;
             Assert.AreEqual(expectedSize, actual);
         }
 
@@ -44,7 +44,7 @@ namespace CircustreinTest
             train.DistibuteAnimals();
 
             //Assert
-            int actual = train.wagonList[0].animalList[0].Size;
+            int actual = train.wagonListReadOnly[0].animalList[0].Size;
             Assert.AreEqual(expectedSize, actual);
         }
 
@@ -68,7 +68,7 @@ namespace CircustreinTest
             train.DistibuteAnimals();
 
             //Assert
-            int actual = train.wagonList.Count;
+            int actual = train.wagonListReadOnly.Count;
             Assert.AreEqual(expectedAmountOfWagons, actual);
         }
 
@@ -90,7 +90,7 @@ namespace CircustreinTest
             train.DistibuteAnimals();
 
             //Assert
-            int actual = train.wagonList.Count;
+            int actual = train.wagonListReadOnly.Count;
             Assert.AreEqual(expectedAmountOfWagons, actual);
         }
     }

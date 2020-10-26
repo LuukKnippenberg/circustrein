@@ -3,20 +3,18 @@ using System.Collections.Generic;
 
 namespace Circustrein
 {
-    class Animal
+    partial class Animal
     {
-
-        public enum Diet { Carnivore, Herbivore };
-
-        public Animal(string _name, Diet _diet, int _size)
+        //Size Enum
+        public Animal(string _name, Diets _diet, Sizes _size)
         {
-            name = _name;
-            size = _size;
-            diet = _diet;
+            Name = _name;
+            Size = _size;
+            Diet = _diet;
         }
 
-        public string name { get; set; }
-        public Diet diet { get; set; }
-        public int size { get; set; }
+        public string Name { get; private set; }
+        public Diets Diet { get; private set; }
+        public Sizes Size { get; private set; }
     }
 }

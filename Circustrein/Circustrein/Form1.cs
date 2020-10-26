@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -22,18 +23,34 @@ namespace Circustrein
 
         private void btnAddAnimal_Click(object sender, EventArgs e)
         {
-            Animal.Diet diet;
+            Animal.Diets diet;
 
             if (rbCarnivore.Checked)
             {
-                diet = Animal.Diet.Carnivore;
+                diet = Animal.Diets.Carnivore;
             }
             else
             {
-                diet = Animal.Diet.Herbivore;
+                diet = Animal.Diets.Herbivore;
             }
 
-            train.AddAnimal(tbName.Text, diet, cbSize.Text);
+            Animal.Sizes size;
+
+            //Converts size to number for storage
+            switch (cbSize.Text.ToLower())
+            {
+                case "small":
+                    size = Animal.Sizes.Small;
+                    break;
+                case "medium":
+                    size = Animal.Sizes.Medium;
+                    break;
+                default:
+                    size = Animal.Sizes.Large;
+                    break;
+            }
+
+            train.AddAnimal(tbName.Text, diet, size);
             DisplayAnimalList();
         }
 
@@ -45,12 +62,12 @@ namespace Circustrein
         private void DisplayAnimalList()
         {
             lbAnimalList.Items.Clear();
-            List<Animal> animalList = train.ActualAnimalList;
+            List<Animal> animalList = new List<Animal>(train.animalListReadOnly);
 
             for (int i = 0; i < animalList.Count; i++)
             {
                 Animal currentAnimal = animalList[i];
-                lbAnimalList.Items.Add(currentAnimal.name + " - Size: " + currentAnimal.size + " - Diet: " + currentAnimal.diet);
+                lbAnimalList.Items.Add(currentAnimal.Name + " - Size: " + currentAnimal.Size + " - Diet: " + currentAnimal.Diet);
             }
         }
 
@@ -65,12 +82,12 @@ namespace Circustrein
         {
             lbDistributedAnimals.Items.Clear();
 
-            for (int i = 0; i < train.wagonList.Count; i++)
+            for (int i = 0; i < train.wagonListReadOnly.Count; i++)
             {
-                for (int x = 0; x < train.wagonList[i].animalList.Count; x++)
+                for (int x = 0; x < train.wagonListReadOnly[i].animalListReadOnly.Count; x++)
                 {
-                    Animal currentAnimal = train.wagonList[i].animalList[x];
-                    lbDistributedAnimals.Items.Add(currentAnimal.name + " - Size: " + currentAnimal.size + " - Diet: " + currentAnimal.diet + " - Wagon: " + (i + 1));
+                    Animal currentAnimal = train.wagonListReadOnly[i].animalListReadOnly[x];
+                    lbDistributedAnimals.Items.Add(currentAnimal.Name + " - Size: " + currentAnimal.Size + " - Diet: " + currentAnimal.Diet + " - Wagon: " + (i + 1));
                 }
             }
         }

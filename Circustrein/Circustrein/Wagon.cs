@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Circustrein
 {
     class Wagon
     {
-        public List<Animal> animalList { get; private set; }
+        private List<Animal> animalList;
+        public ReadOnlyCollection<Animal> animalListReadOnly
+        {
+            get { return animalList.AsReadOnly(); }
+        }
         private int currentContent;
         private int maxContent = 10;
 
@@ -19,20 +25,22 @@ namespace Circustrein
             if(CheckForSpace(animal) && CheckSafety(animal))
             {
                 animalList.Add(animal);
-                currentContent = currentContent + animal.size;
+                currentContent += (int)animal.Size;
                 return true;
             }
             else
             {
+                
                 return false;
             }            
         }
 
         private bool CheckForSpace(Animal animal)
         {  
-            if ((animal.size + currentContent) <= (maxContent))
+            if (((int)animal.Size + currentContent) <= (maxContent))
             {
                 return true;
+
             }
             else
             {
@@ -43,35 +51,20 @@ namespace Circustrein
 
         private bool CheckSafety(Animal animal)
         {
-            //bool safe = true;
-
             for (int i = 0; i < animalList.Count; i++)
             {
-                if(animalList[i].diet.ToString() == "carnivore" && animalList[i].size >= animal.size)
-                {
-                    //safe = false;
+                if(animalList[i].Diet == Animal.Diets.Carnivore && (int)animalList[i].Size >= (int)animal.Size)
+                {                    
                     return false;
                 }
 
-                if(animal.diet.ToString() == "carnivore" && animalList[i].size <= animal.size)
+                if(animal.Diet == Animal.Diets.Carnivore && animalList[i].Size <= animal.Size)
                 {
-                    //safe = false;
                     return false;
                 }
             }
 
             return true;
-
-            /*
-            if (safe)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            */
         }
     }
 }
