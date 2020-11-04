@@ -13,8 +13,9 @@ namespace CircustreinTest
             //Arrange
             Wagon wagon = new Wagon();
             string name = "test";
-            string diet = "carnivore";
-            int size = 3;
+            Animal.Diets diet = Animal.Diets.Carnivore;
+            Animal.Sizes size = Animal.Sizes.Medium;
+
             Animal animal = new Animal(name, diet, size);
 
             //Act

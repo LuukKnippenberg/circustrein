@@ -12,8 +12,8 @@ namespace CircustreinTest
         {
             // Arrange
             string name = "test";
-            string diet = "Herbivore";
-            string size = "Large";
+            Animal.Diets diet = Animal.Diets.Herbivore;
+            Animal.Sizes size = Animal.Sizes.Large;
             int expectedSize = 5;
             Train train = new Train();
 
@@ -21,7 +21,7 @@ namespace CircustreinTest
             train.AddAnimal(name, diet, size);
 
             //Assert
-            int actual = train.animalListReadOnly[0].Size;
+            int actual = (int)train.animalListReadOnly[0].Size;
             Assert.AreEqual(expectedSize, actual);
         }
 
@@ -31,10 +31,10 @@ namespace CircustreinTest
             //Arrange
             Train train = new Train();
             string name = "test";
-            string diet = "Herbivore";
-            string size1 = "Small";
-            string size2 = "Medium";
-            string size3 = "Large";
+            Animal.Diets diet = Animal.Diets.Herbivore;
+            Animal.Sizes size1 = Animal.Sizes.Small;
+            Animal.Sizes size2 = Animal.Sizes.Medium;
+            Animal.Sizes size3 = Animal.Sizes.Large;
             int expectedSize = 5;
             
             //Act
@@ -44,7 +44,7 @@ namespace CircustreinTest
             train.DistibuteAnimals();
 
             //Assert
-            int actual = train.wagonListReadOnly[0].animalList[0].Size;
+            int actual = (int)train.wagonListReadOnly[0].animalListReadOnly[0].Size;
             Assert.AreEqual(expectedSize, actual);
         }
 
@@ -54,11 +54,11 @@ namespace CircustreinTest
             //Arrange
             Train train = new Train();
             string name = "test";
-            string diet = "herbivore";
-            string diet2 = "carnivore";
-            string size1 = "Small";
-            string size2 = "Medium";
-            string size3 = "Large";
+            Animal.Diets diet = Animal.Diets.Herbivore;
+            Animal.Diets diet2 = Animal.Diets.Carnivore;
+            Animal.Sizes size1 = Animal.Sizes.Small;
+            Animal.Sizes size2 = Animal.Sizes.Medium;
+            Animal.Sizes size3 = Animal.Sizes.Large;
             int expectedAmountOfWagons = 2;
 
             //Act
@@ -78,8 +78,8 @@ namespace CircustreinTest
             //Arrange
             Train train = new Train();
             string name = "test";
-            string diet = "herbivore";
-            string size = "small";
+            Animal.Diets diet = Animal.Diets.Herbivore;
+            Animal.Sizes size = Animal.Sizes.Small;
             int expectedAmountOfWagons = 4;
 
             //Act
