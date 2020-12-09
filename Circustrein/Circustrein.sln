@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Circustrein", "Circustrein\Circustrein.csproj", "{41CA69F7-D59F-433D-B46E-1E35CC26B4A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircustreinTest", "CircustreinTest\CircustreinTest.csproj", "{66D2EC7D-0F3D-4DFF-AE07-818132D557E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircustreinUnittests", "CircustreinTest\CircustreinUnittests.csproj", "{66D2EC7D-0F3D-4DFF-AE07-818132D557E2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{41CA69F7-D59F-433D-B46E-1E35CC26B4A5} = {41CA69F7-D59F-433D-B46E-1E35CC26B4A5}
 	EndProjectSection

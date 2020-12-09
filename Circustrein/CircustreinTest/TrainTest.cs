@@ -8,7 +8,7 @@ namespace CircustreinTest
     public class TrainTest
     {
         [TestMethod]
-        public void AddNewAnimal()
+        public void AddAnimal_ExpectedSizeEqualsFive_True()
         {
             // Arrange
             string name = "test";
@@ -26,7 +26,25 @@ namespace CircustreinTest
         }
 
         [TestMethod]
-        public void CreateAnimalsAndDistribute()
+        public void AddAnimal_ExpectedAmountOfWagonsDoesNotEqualSeven_True()
+        {
+            // Arrange
+            string name = "test";
+            Animal.Diets diet = Animal.Diets.Herbivore;
+            Animal.Sizes size = Animal.Sizes.Large;
+            int expectedSize = 7;
+            Train train = new Train();
+
+            // Act
+            train.AddAnimal(name, diet, size);
+
+            //Assert
+            int actual = (int)train.animalListReadOnly[0].Size;
+            Assert.AreNotEqual(expectedSize, actual);
+        }
+
+        [TestMethod]
+        public void AddAnimalAndDistributeAnimals_ExpectedAmountOfWagonsEqualsFive_True()
         {
             //Arrange
             Train train = new Train();
@@ -49,7 +67,7 @@ namespace CircustreinTest
         }
 
         [TestMethod]
-        public void DistributeWithCarnivore()
+        public void DistributeAnimals_ExpectedAmountOfWagonsEqualsTwoBecauseOfSafety_True()
         {
             //Arrange
             Train train = new Train();
@@ -73,7 +91,7 @@ namespace CircustreinTest
         }
 
         [TestMethod]
-        public void WagonMaxContentCheck()
+        public void DistributeAnimals_ExpectedAmountOfWagonsEqualsFour_True()
         {
             //Arrange
             Train train = new Train();
@@ -81,6 +99,30 @@ namespace CircustreinTest
             Animal.Diets diet = Animal.Diets.Herbivore;
             Animal.Sizes size = Animal.Sizes.Small;
             int expectedAmountOfWagons = 4;
+
+            //Act
+            for (int i = 0; i < 35; i++)
+            {
+                train.AddAnimal(name, diet, size);
+            }
+            train.DistibuteAnimals();
+
+            //Assert
+            int actual = train.wagonListReadOnly.Count;
+            Assert.AreEqual(expectedAmountOfWagons, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AssertFailedException),
+            "Expected amount of wagons does not equal the actual amount of wagons!")]
+        public void DistributeAnimals_ExpectedAmountOfWagonsEqualsSixty_ExceptionThrown()
+        {
+            //Arrange
+            Train train = new Train();
+            string name = "test";
+            Animal.Diets diet = Animal.Diets.Herbivore;
+            Animal.Sizes size = Animal.Sizes.Small;
+            int expectedAmountOfWagons = 60;
 
             //Act
             for (int i = 0; i < 35; i++)
