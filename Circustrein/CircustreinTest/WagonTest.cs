@@ -31,7 +31,7 @@ namespace CircustreinTest
         [TestMethod]
         [ExpectedException(typeof(AssertFailedException),
             "Expected amount of animals does not equal the actual amount of animals in the wagon!")]
-        public void AddAnimal_AddTooManyWagonsTooWagon_ExceptionThrow()
+        public void AddAnimal_AddTooManyAnimalsToWagon_ExceptionThrow()
         {
             //Arrange
             Wagon wagon = new Wagon();

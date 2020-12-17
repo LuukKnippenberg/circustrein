@@ -135,5 +135,33 @@ namespace CircustreinTest
             int actual = train.wagonListReadOnly.Count;
             Assert.AreEqual(expectedAmountOfWagons, actual);
         }
+
+
+        [TestMethod]
+        public void AddAnimal_CheckIfDistributionIsCorrect_True()
+        {
+            //Arrange
+            Train train = new Train();
+            string name = "test";
+            Animal.Diets dietHerbivore = Animal.Diets.Herbivore;
+            Animal.Sizes size = Animal.Sizes.Medium;
+
+            Animal.Diets dietCarnivore = Animal.Diets.Carnivore;
+
+            Animal animalHerbivore = new Animal(name, dietHerbivore, size);
+            Animal animalCarnivore = new Animal(name, dietCarnivore, size);
+
+
+            //Act
+            train.AddAnimal(name, dietHerbivore, size);
+            train.AddAnimal(name, dietCarnivore, size);
+            train.DistibuteAnimals();
+
+            //Assert
+
+            Assert.AreEqual(animalCarnivore.Diet, train.wagonListReadOnly[0].animalListReadOnly[0].Diet);
+            Assert.AreEqual(animalHerbivore.Diet, train.wagonListReadOnly[1].animalListReadOnly[0].Diet);
+        }
+
     }
 }
